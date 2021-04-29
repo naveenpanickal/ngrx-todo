@@ -1,1 +1,50 @@
-<p>to-do works!</p>
+
+<div class="container">
+
+    <mat-card class="add-edit">
+        <mat-card-header>
+          <mat-card-title>
+            <h1>
+                <span *ngIf="selectedTask.id; else prompt">Edit</span>
+                <ng-template #prompt>Create Task</ng-template>
+                <!-- <span>Create task</span> -->
+            </h1>
+          </mat-card-title>
+        </mat-card-header>
+        <form #taskForm = "ngForm" (ngSubmit) = "saveTask(taskForm)">
+          <mat-card-content>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Title" [(ngModel)]="selectedTask.title" type="text" name="title">
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button type="submit" mat-button color="primary">Save</button>
+            <button type="button" (click)="onCancel()" mat-button>Cancel</button>
+          </mat-card-actions>
+    </form>
+    </mat-card>
+
+
+
+
+
+    <mat-card class="task-list">
+        <mat-card-header>
+          <mat-card-title>
+            <h2>Tasks</h2>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item *ngFor="let task of tasks" (click) = "onSelect(task)"  class="record">
+              <h3 mat-line>{{task.title}}</h3>
+              <button  mat-icon-button (click)="delete(task);$event.stopImmediatePropagation();">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+</div>
+
+
