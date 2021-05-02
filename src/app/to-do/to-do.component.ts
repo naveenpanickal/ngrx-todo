@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from '../model/task.model';
 import { TaskService } from '../services/task/task.service';
+import { Store } from '@ngrx/store'
+import { TasksState } from '../state/tasks/tasks.reducer';
 
 @Component({
   selector: 'app-to-do',
@@ -11,7 +13,7 @@ import { TaskService } from '../services/task/task.service';
 })
 export class ToDoComponent implements OnInit {
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService, private store: Store<TasksState>) { }
 
   emptyTask: Task = {
     id: null,
